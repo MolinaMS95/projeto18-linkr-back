@@ -27,3 +27,11 @@ export function createSession(userid, token) {
     [userid, token]
   );
 }
+
+export function getSessionByToken(token) {
+  return connectionDB.query("SELECT * FROM sessions WHERE token=$1;", [token]);
+}
+
+export function getUserById(id) {
+  return connectionDB.query("SELECT * FROM users WHERE id=$1;", [id]);
+}

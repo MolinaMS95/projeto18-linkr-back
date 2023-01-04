@@ -31,3 +31,14 @@ export async function signIn(req, res) {
     res.status(500).send(error.message);
   }
 }
+
+export async function logout(req, res) {
+  const user = res.locals.user;
+
+  try {
+    await deleteSession(user.id);
+    res.sendStatus(200);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}

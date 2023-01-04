@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { getUserByEmail } from "../repositories/users.repositories";
+import { getUserByEmail } from "../repositories/users.repositories.js";
 
 export async function signInValidation(req, res, next) {
   const { email, password } = res.locals.user;
