@@ -1,10 +1,11 @@
 import { getSessionByToken, getUserById } from "../repositories/users.repositories.js";
 
 export async function userTokenValidation(req, res, next) {
-  const authorization = req.headers.authorization;
-  console.log("authorization")
-
-
+  const { authorization } = req.headers;
+  const token = authorization?.replace("Bearer ", "");
+  if (!token) {
+    return res.sendStatus(401);
+  }
   try {
     const { rows } = await getSessionByToken(token);
     if (rows.length === 0) {
