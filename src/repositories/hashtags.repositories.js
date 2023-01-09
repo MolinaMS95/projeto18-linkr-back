@@ -32,3 +32,16 @@ export function selectHashtagPosts(){
         "SELECT * FROM hashtag_posts;"
     )
 }
+
+export function getTrendingHashtags(){
+    return connectionDB.query(
+        "SELECT TOP 10 hashtag FROM hashtag_post GROUP BY hashtag ORDER BY COUNT(hashtag) "
+    )
+}
+
+export function getHashtagPosts(hashtagName){
+    return connectionDB.query(
+        "SELECT hashtag FROM hashtag_post WHERE hashtag=(1$)",
+        [hashtagName]
+    )
+}
