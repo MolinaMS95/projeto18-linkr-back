@@ -5,13 +5,20 @@ import { userTokenValidation } from "../middlewares/userTokenValidation.middlewa
 import { postsSchemaValidation } from "../middlewares/postsSchemaValidation.middleware.js";
 import { collectHashtags } from "../middlewares/collectHashtags.middleware.js";
 import { publishPost, getPosts } from "../controllers/posts.controller.js";
+import { collectMetadata } from "../middlewares/collectMetadata.middleware.js";
 
 const postsRouter = Router();
 
 postsRouter.get('/user/:id', userIdValidation, getSomeonesPosts);
 
-router.post("/posts",userTokenValidation, postsSchemaValidation, collectHashtags,publishPost);
-
+router.post(
+  "/posts",
+  userTokenValidation,
+  postsSchemaValidation,
+  collectHashtags,
+  collectMetadata,
+  publishPost
+);
 router.get("/posts",getPosts);
 
 export default postsRouter;

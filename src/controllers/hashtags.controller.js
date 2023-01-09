@@ -3,10 +3,11 @@ import { getHashtagPosts, getTrendingHashtags, insertHashtag, insertHashtagPosts
 export async function postHashtags(hashtags, postId){
     try{
         hashtags.map(async (hashtag)=>{
-            const {rows} = await selectHashtagByName(hashtag);
+            let {rows} = await selectHashtagByName(hashtag);
             let hashtagId;
             if(rows.length == 0){
-                hashtagId = await insertHashtag(hashtag);
+                ({rows}= await insertHashtag(hashtag));
+                hashtagId = rows[0].id;
             }else{
                 hashtagId = rows[0].id;
             }
