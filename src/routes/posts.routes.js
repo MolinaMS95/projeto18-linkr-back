@@ -1,17 +1,17 @@
 import { Router } from 'express';
 import { getSomeonesPosts } from '../controllers/posts.controllers.js';
-import userIdValidation from '../middlewares/useridValidation.middleware.js';
 import { userTokenValidation } from "../middlewares/userTokenValidation.middleware.js";
 import { postsSchemaValidation } from "../middlewares/postsSchemaValidation.middleware.js";
 import { collectHashtags } from "../middlewares/collectHashtags.middleware.js";
 import { publishPost, getPosts } from "../controllers/posts.controller.js";
 import { collectMetadata } from "../middlewares/collectMetadata.middleware.js";
+import userIdValidation from '../middlewares/userIdValidation.middleware.js';
 
 const postsRouter = Router();
 
 postsRouter.get('/user/:id', userIdValidation, getSomeonesPosts);
 
-router.post(
+postsRouter.post(
   "/posts",
   userTokenValidation,
   postsSchemaValidation,
@@ -19,6 +19,6 @@ router.post(
   collectMetadata,
   publishPost
 );
-router.get("/posts",getPosts);
+postsRouter.get("/posts",getPosts);
 
 export default postsRouter;

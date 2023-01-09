@@ -41,7 +41,7 @@ export function getTrendingHashtags(){
 
 export function getHashtagPosts(hashtagName){
     return connectionDB.query(
-        "SELECT hashtag FROM hashtag_post WHERE hashtag=(1$)",
+        "SELECT * FROM hashtag_post WHERE hashtag=(1$)",
         [hashtagName]
     )
 }
