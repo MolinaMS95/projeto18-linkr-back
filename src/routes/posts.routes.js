@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { getSomeonesPosts } from '../controllers/posts.controllers.js';
-import userIdValidation from '../middlewares/userIdValidation.middleware.js';
 import { userTokenValidation } from "../middlewares/userTokenValidation.middleware.js";
 import { postsSchemaValidation } from "../middlewares/postsSchemaValidation.middleware.js";
 import { collectHashtags } from "../middlewares/collectHashtags.middleware.js";
