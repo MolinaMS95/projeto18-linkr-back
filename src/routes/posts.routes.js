@@ -9,7 +9,7 @@ import userIdValidation from '../middlewares/userIdValidation.middleware.js';
 
 const postsRouter = Router();
 
-postsRouter.get('/user/:id', userIdValidation, getSomeonesPosts);
+postsRouter.get('/user/:id', userTokenValidation, userIdValidation, getSomeonesPosts);
 
 postsRouter.post(
   "/posts",
