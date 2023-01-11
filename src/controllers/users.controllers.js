@@ -1,5 +1,11 @@
 import bcrypt from "bcrypt";
-import { createSession, deleteSession, getSessionById, insertUser } from "../repositories/users.repositories.js";
+import {
+  createSession,
+  deleteSession,
+  getSessionById,
+  getUserById,
+  insertUser,
+} from "../repositories/users.repositories.js";
 import { v4 as uuidV4 } from "uuid";
 
 export async function signUp(req, res) {
@@ -38,6 +44,17 @@ export async function logout(req, res) {
   try {
     await deleteSession(user.id);
     res.sendStatus(200);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}
+
+export async function getUser(req, res) {
+  const user = res.locals.user;
+
+  try {
+    const { rows } = await getUserById(user.id);
+    res.status(200).send(rows[0]);
   } catch (error) {
     res.status(500).send(error.message);
   }
