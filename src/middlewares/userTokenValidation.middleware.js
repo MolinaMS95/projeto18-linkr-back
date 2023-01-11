@@ -6,7 +6,6 @@ export async function userTokenValidation(req, res, next) {
   if (!token) {
     return res.sendStatus(401);
   }
-
   try {
     const { rows } = await getSessionByToken(token);
     if (rows.length === 0) {
