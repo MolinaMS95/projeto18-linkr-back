@@ -45,12 +45,12 @@ export async function setFollow(req, res) {
 
     try {
         const {rows} = await connectionDB.query(`
-            SELECT * FROM followers
+            SELECT * FROM relationships
             WHERE followerid = $1 AND followedid = $2;
         `, noInjection);
 
-        const queryInsert = 'INSERT INTO followers (followerid, followedid) VALUES ($1, $2);';
-        const queryDelete = 'DELETE FROM followers WHERE followerid = $1 AND followedid = $2;';
+        const queryInsert = 'INSERT INTO relationships (followerid, followedid) VALUES ($1, $2);';
+        const queryDelete = 'DELETE FROM relationships WHERE followerid = $1 AND followedid = $2;';
 
         await connectionDB.query(rows.length === 0 ? queryInsert : queryDelete, noInjection);
 

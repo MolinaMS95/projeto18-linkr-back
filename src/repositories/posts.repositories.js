@@ -20,10 +20,10 @@ export function getPostsByUserid(requesterid, userid) {
             GROUP BY posts.id, l."numberOfLikes"
         ) p
         FULL JOIN (
-            SELECT followers.followedid, COUNT(followers) AS "boolFollowing"
-            FROM followers
+            SELECT relationships.followedid, COUNT(relationships) AS "boolFollowing"
+            FROM relationships
             WHERE followerid = $1 AND followedid = $2
-            GROUP BY followers.followedid
+            GROUP BY relationships.followedid
         ) f ON p.userid = f.followedid
         GROUP BY f."boolFollowing";
     `, [requesterid, userid]);
