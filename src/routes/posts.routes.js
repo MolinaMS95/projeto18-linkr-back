@@ -6,7 +6,6 @@ import { postsSchemaValidation } from "../middlewares/postsSchemaValidation.midd
 import { collectHashtags } from "../middlewares/collectHashtags.middleware.js";
 import { publishPost, getPosts } from "../controllers/posts.controller.js";
 import { collectMetadata } from "../middlewares/collectMetadata.middleware.js";
-import userIdValidation from '../middlewares/userIdValidation.middleware.js';
 
 const postsRouter = Router();
 
