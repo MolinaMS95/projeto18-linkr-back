@@ -14,7 +14,7 @@ export async function getUsers(req, res) {
     }
 
     try {
-        const {rows} = await getUsersByInitial(params.initial);
+        const {rows} = await getUsersByInitial(res.locals.user.id, params.initial);
 
         res.send(rows);
     } catch {
