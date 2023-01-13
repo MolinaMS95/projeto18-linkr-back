@@ -6,13 +6,13 @@ export function getUsersByInitial(requesterid, initial) {
         FROM (
             SELECT 'key' AS key, JSON_AGG(u1) AS followed
             FROM (
-                SELECT users.id, users.username, users.pictureurl FROM users
+                SELECT TRUE AS follows, users.id, users.username, users.pictureurl FROM users
             ) u1 FULL JOIN relationships ON u1.id = relationships.followedid
             WHERE u1.username LIKE '${initial}%' AND relationships.followerid = $1
         ) f FULL JOIN (
             SELECT 'key' AS key, JSON_AGG(u2) AS reminder
             FROM (
-                SELECT users.id, users.username, users.pictureurl FROM users
+                SELECT FALSE AS follows, users.id, users.username, users.pictureurl FROM users
                 ) u2 WHERE u2.id NOT IN (
                     SELECT users.id FROM users
                     FULL JOIN relationships ON users.id = relationships.followedid
