@@ -24,7 +24,7 @@ export async function publishPost(req, res) {
 export async function getPosts(req, res) {
   const limit = parseInt(req.query.limit);
   try {
-    let { rows: postsRows } = await selectPosts();
+    let { rows: postsRows } = await selectPosts(res.locals.user.id);
     postsRows = postsRows.reverse();
     if (limit > 0) {
       postsRows = postsRows.slice(0, limit);
