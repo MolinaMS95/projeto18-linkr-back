@@ -43,8 +43,12 @@ export function insertPost(
   );
 }
 
-export function selectPosts(){
-  return connectionDB.query(
-    "SELECT * from posts;"
-  );
+export function selectPosts(requesterid){
+  return connectionDB.query(`
+    SELECT posts.*
+    FROM relationships
+    JOIN posts
+    ON relationships.followedid = posts.userid
+    WHERE relationships.followerid = $1;
+  `, [requesterid]);
 }

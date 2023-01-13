@@ -21,6 +21,7 @@ postsRouter.post(
   collectMetadata,
   publishPost
 );
-postsRouter.get("/posts",getPosts);
+
+postsRouter.get("/posts", userTokenValidation, getPosts);
 
 export default postsRouter;
