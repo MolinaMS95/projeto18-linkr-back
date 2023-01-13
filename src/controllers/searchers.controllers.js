@@ -18,8 +18,10 @@ export async function getUsers(req, res) {
 
         if (rows[0].followed === null) rows[0].followed = [];
         if (rows[0].reminder === null) rows[0].reminder = [];
+
+        const users = rows[0].followed.concat(rows[0].reminder);
         
-        res.send(rows[0]);
+        res.send(users);
     } catch {
         res.sendStatus(500);
     }
